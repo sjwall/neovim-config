@@ -4,8 +4,8 @@ local wk = require('which-key')
 wk.add({
   { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
   -- Move code up and down
-  { 'J', ":m '>+1<CR>gv=gv", mode = 'v' },
-  { 'K', ":m '<-2<CR>gv=gv", mode = 'v' },
+  { 'J', "<cmd>m '>+1<CR>gv=gv", mode = 'v' },
+  { 'K', "<cmd>m '<-2<CR>gv=gv", mode = 'v' },
 
   -- Center view when going up and down
   { '<C-d>', '<C-d>zz' },
@@ -96,10 +96,10 @@ wk.add({
   { '<C-k>', '<cmd>wincmd k<CR>', mode = 't', desc = 'Move focus to the upper window' },
 
   -- Resize window
-  { '<C-Up>', ':resize -2<CR>' },
-  { '<C-Down>', ':resize +2<CR>' },
-  { '<C-Left>', ':vertical resize -2<CR>' },
-  { '<C-Right>', ':vertical resize +2<CR>' },
+  { '<C-Up>', '<cmd>resize -2<CR>' },
+  { '<C-Down>', '<cmd>resize +2<CR>' },
+  { '<C-Left>', '<cmd>vertical resize -2<CR>' },
+  { '<C-Right>', '<cmd>vertical resize +2<CR>' },
 
   -- terminal
   { '<C-Up>', '<cmd>resize -2<CR>', mode = 't' },
