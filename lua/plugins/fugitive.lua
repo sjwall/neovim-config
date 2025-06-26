@@ -6,7 +6,8 @@ return {
     vim.keymap.set('n', '<leader>gg', '<cmd>Git push<CR>', { desc = '[G]it Push' })
 
     vim.keymap.set('n', '<leader>gcm', '<cmd>Git checkout main<CR>', { desc = 'Git [C]heckout [M]ain' })
-    vim.keymap.set('n', '<leader>gcb', ':Git checkout -b ', { desc = 'Git [C]heckout new [b]ranch' })
+    vim.keymap.set('n', '<leader>gcb', ':Git checkout -b ', { desc = 'Git [C]heckout new [B]ranch' })
+    vim.keymap.set('n', '<leader>gcr', ':Git checkout -m ', { desc = 'Git [C]heckout [R]ename branch' })
 
     vim.keymap.set('n', '<leader>gmm', '<cmd>Git merge main<CR>', { desc = 'Git [M]erge [M]ain' })
 
