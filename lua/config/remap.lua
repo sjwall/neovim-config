@@ -4,8 +4,8 @@ local wk = require('which-key')
 wk.add({
   { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
   -- Move code up and down
-  { 'J', "<cmd>m '>+1<CR>gv=gv", mode = 'v' },
-  { 'K', "<cmd>m '<-2<CR>gv=gv", mode = 'v' },
+  { 'J', ":m '>+1<CR>gv=gv", mode = 'v' },
+  { 'K', ":m '<-2<CR>gv=gv", mode = 'v' },
 
   -- Center view when going up and down
   { '<C-d>', '<C-d>zz' },
