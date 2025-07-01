@@ -4,6 +4,7 @@ return {
     vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Open Git [S]taging' })
     vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<CR>', { desc = 'Git [P]ull' })
     vim.keymap.set('n', '<leader>gg', '<cmd>Git push<CR>', { desc = '[G]it Push' })
+    vim.keymap.set('n', '<leader>gf', '<cmd>Git fetch<CR>', { desc = 'Git [F]etch' })
 
     vim.keymap.set('n', '<leader>gbm', '<cmd>Git checkout main<CR>', { desc = 'Git [B]ranch switch [M]ain' })
     vim.keymap.set('n', '<leader>gbn', ':Git checkout -b ', { desc = 'Git [B]ranch [N]ew' })
