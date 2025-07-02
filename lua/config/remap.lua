@@ -23,7 +23,7 @@ wk.add({
   { '<leader>Y', [["+Y]], icon = '󰆒' },
 
   -- Find and replace
-  { '<leader>r', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]] },
+  { '<leader>r', [[:%s/<C-r><C-w>/<C-r><C-w>/gI<Left><Left><Left>]] },
 
   { '<leader>x', '<cmd>!chmod +x %<CR>', silent = true },
 
