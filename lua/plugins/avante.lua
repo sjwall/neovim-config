@@ -1,15 +1,26 @@
+local hostname = vim.fn.hostname()
+local provider = 'ollama'
+local providers = {
+  ollama = {
+    model = 'deepseek-r1:14b',
+  },
+}
+
+if hostname == 'Mac' then
+  provider = 'gemini'
+  providers.gemini = {
+    model = 'gemini-2.0-flash',
+  }
+end
+
 return {
   {
     'yetone/avante.nvim',
     event = 'VeryLazy',
     version = false, -- Never set this value to "*"! Never!
     opts = {
-      provider = 'ollama',
-      providers = {
-        ollama = {
-          model = 'deepseek-r1:14b',
-        },
-      },
+      provider = provider,
+      providers = providers,
       behaviour = {
         enable_cursor_planning_mode = true,
       },
