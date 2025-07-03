@@ -1,4 +1,9 @@
 local hostname = vim.fn.hostname()
+
+if hostname == 'maclon0729' then
+  return {}
+end
+
 local provider = 'ollama'
 local providers = {
   ollama = {
