@@ -1,5 +1,3 @@
-vim.g.mapleader = ' '
-
 local wk = require('which-key')
 wk.add({
   { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
