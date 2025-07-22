@@ -19,6 +19,9 @@ function M.get_config()
 
   if not ok then
     local hostname = vim.fn.hostname()
+    if string.sub(hostname, -6) == '.local' then
+      hostname = string.sub(hostname, 1, #hostname - 6)
+    end
     ok, config = load_config('config.config_' .. hostname)
   end
 

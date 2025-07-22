@@ -1,8 +1,4 @@
-local hostname = vim.fn.hostname()
-
-if hostname == 'maclon0729' then
-  return {}
-end
+local config = require('config.config_loader').get_item_config('avante.nvim')
 
 local provider = 'ollama'
 local providers = {
@@ -11,11 +7,9 @@ local providers = {
   },
 }
 
-if hostname == 'Mac' then
-  provider = 'gemini'
-  providers.gemini = {
-    model = 'gemini-2.0-flash',
-  }
+if config ~= nil and config ~= true and config ~= false and config.opt and config.provider then
+  provider = config.opt.provider
+  providers = config.opt.providers
 end
 
 return {
