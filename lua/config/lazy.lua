@@ -27,8 +27,7 @@ require('lazy').setup({
     ---@param self LazyPlugin
     ---@return boolean
     cond = function(self)
-  --    vim.notify(self.name)
-      return true
+      return require('config.config_loader').is_enabled(self.name)
     end,
   },
   spec = {

@@ -1,1 +1,6 @@
 lazy-lock.json
+
+lua/config/config.lua
+lua/config/config_*.lua
+!lua/config/config_default.lua
+!lua/config/config_loader.lua
