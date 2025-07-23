@@ -44,7 +44,8 @@ function M.get_item_config(name)
 end
 
 function M.is_enabled(name)
-  return M.get_item_config(name) ~= nil
+  local config = M.get_config()
+  return not config or config[name] ~= false
 end
 
 return M
