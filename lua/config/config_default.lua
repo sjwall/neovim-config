@@ -3,6 +3,7 @@ config['avante.nvim'] = true
 config['blink.cmp'] = true
 config['Comment.nvim'] = true
 config['conform.nvim'] = true
+config['copilot.vim'] = false
 config['dressing.nvim'] = true
 config['fidget.nvim'] = true
 config['fzf-lua'] = true
