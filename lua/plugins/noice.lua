@@ -24,5 +24,22 @@ return {
         lsp_doc_border = false, -- add a border to hover docs and signature help
       },
     })
+
+    require('which-key').add({
+      {
+        '<leader>mm',
+        function()
+          require('noice').cmd('history')
+        end,
+        desc = 'Show [M]essages [H]istory',
+      },
+      {
+        '<leader>md',
+        function()
+          require('noice').cmd('dismiss')
+        end,
+        desc = '[M]essages [D]imiss',
+      },
+    })
   end,
 }
