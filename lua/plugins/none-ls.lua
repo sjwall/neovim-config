@@ -3,8 +3,8 @@ return {
   event = 'VeryLazy',
   dependencies = { 'davidmh/cspell.nvim' },
   cond = function()
-    vim.fn.system({ 'npx', '--no-install', 'cspell', '--help' })
-    return vim.v.shell_error == 0
+    success = pcall(vim.fn.system, { 'npx', '--no-install', 'cspell', '--help' })
+    return success and vim.v.shell_error == 0
   end,
   opts = function(_, opts)
     local cspell = require('cspell')
