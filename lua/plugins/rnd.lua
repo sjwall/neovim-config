@@ -1,5 +1,7 @@
+local directory = require('../utils/directory')
 return {
   'sjwall/react-native-directory.nvim',
+  dir = directory.exists_or_nil('/mnt/ssd1/projects/react-native-directory.nvim'),
   dependencies = {
     'nvim-lua/plenary.nvim',
   },
