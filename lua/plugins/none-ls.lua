@@ -12,11 +12,17 @@ return {
     table.insert(
       opts.sources,
       cspell.diagnostics.with({
+        prefer_local = 'node_modules/.bin',
         diagnostics_postprocess = function(diagnostic)
           diagnostic.severity = vim.diagnostic.severity.HINT
         end,
       })
     )
-    table.insert(opts.sources, cspell.code_actions)
+    table.insert(
+      opts.sources,
+      cspell.code_actions.with({
+        prefer_local = 'node_modules/.bin',
+      })
+    )
   end,
 }
