@@ -1,5 +1,6 @@
 local wk = require('which-key')
 wk.add({
+  { '<leader>cp', ":let @+ = expand('%:p')<CR>", desc = '[C]opy current buffer [P]ath' },
   { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
   -- Move code up and down
   { 'J', ":m '>+1<CR>gv=gv", mode = 'v' },
