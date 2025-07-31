@@ -8,7 +8,7 @@ return {
   {
     'sjwall/react-native-devtools.nvim',
     dir = require('../utils/directory').exists_or_nil('/workspaces/react-native-devtools-nvim'),
-    build = './build.sh',
+    build = 'chmod +x build.sh && ./build.sh',
     event = 'VeryLazy',
     dependencies = {
       'nvim-lua/plenary.nvim',
