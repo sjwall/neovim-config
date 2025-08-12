@@ -40,7 +40,13 @@ wk.add({
   -- Buffers
   { '<TAB>', '<cmd>bn<CR>' },
   { '<S-TAB>', '<cmd>bp<CR>' },
-  { '<leader>b', '<cmd>enew|term<CR>' },
+  {
+    '<leader>b',
+    function()
+      vim.cmd('enew | term')
+      vim.cmd('startinsert!')
+    end,
+  },
   { '<leader>w', '<cmd>noa w<CR>' },
 
   {
