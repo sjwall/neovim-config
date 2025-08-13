@@ -43,7 +43,18 @@ wk.add({
   {
     '<leader>b',
     function()
+      local cdPath = false
+      if vim.bo.filetype == 'oil' then
+        local current_buffer_name = vim.api.nvim_buf_get_name(0)
+        local oil_path = current_buffer_name:gsub('^oil://', '')
+        if oil_path ~= '' and oil_path ~= vim.fn.getcwd() .. '/' then
+          cdPath = vim.fn.fnamemodify(oil_path, ':p')
+        end
+      end
       vim.cmd('enew | term')
+      if cdPath ~= false then
+        vim.fn.chansend(vim.b.terminal_job_id, 'cd ' .. cdPath .. '\nclear\nfc -R\n')
+      end
       vim.cmd('startinsert!')
     end,
   },
