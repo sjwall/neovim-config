@@ -53,7 +53,7 @@ wk.add({
       end
       vim.cmd('enew | term')
       if cdPath ~= false then
-        vim.fn.chansend(vim.b.terminal_job_id, 'cd ' .. cdPath .. '\nclear\nfc -R\n')
+        vim.fn.chansend(vim.b.terminal_job_id, 'cd ' .. cdPath .. '\nfc -R\nclear\n')
       end
       vim.cmd('startinsert!')
     end,
