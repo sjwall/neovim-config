@@ -46,5 +46,25 @@ return {
         desc = '[M]essages [D]imiss',
       },
     })
+
+    vim.api.nvim_create_autocmd({ 'RecordingEnter' }, {
+      pattern = '*',
+      callback = function()
+        require('noice').notify('Recording Macro...', 'macro_start', {
+          icon = '🎬',
+          render = 'compact',
+        })
+      end,
+    })
+
+    vim.api.nvim_create_autocmd({ 'RecordingLeave' }, {
+      pattern = '*',
+      callback = function()
+        require('noice').notify('Macro Recorded!', 'macro_stop', {
+          icon = '✅',
+          render = 'compact',
+        })
+      end,
+    })
   end,
 }
