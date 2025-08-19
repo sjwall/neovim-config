@@ -57,6 +57,7 @@ wk.add({
       end
       vim.cmd('startinsert!')
     end,
+    desc = 'Open [B]uffer in current buffer directory.',
   },
   {
     '<leader>B',
