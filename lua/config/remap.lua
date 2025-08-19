@@ -58,6 +58,14 @@ wk.add({
       vim.cmd('startinsert!')
     end,
   },
+  {
+    '<leader>B',
+    function()
+      vim.cmd('enew | term')
+      vim.cmd('startinsert!')
+    end,
+    desc = 'Open [B]uffer in CWD',
+  },
   { '<leader>w', '<cmd>noa w<CR>' },
 
   {
