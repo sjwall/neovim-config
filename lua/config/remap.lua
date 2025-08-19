@@ -44,12 +44,16 @@ wk.add({
     '<leader>b',
     function()
       local cdPath = false
+      local current_buffer_name = vim.api.nvim_buf_get_name(0)
       if vim.bo.filetype == 'oil' then
-        local current_buffer_name = vim.api.nvim_buf_get_name(0)
         local oil_path = current_buffer_name:gsub('^oil://', '')
         if oil_path ~= '' and oil_path ~= vim.fn.getcwd() .. '/' then
           cdPath = vim.fn.fnamemodify(oil_path, ':p')
         end
+      elseif vim.bo.buftype == 'terminal' then
+        -- TODO figure this out
+      elseif vim.fn.filereadable(current_buffer_name) == 1 then
+        cdPath = vim.fn.fnamemodify(current_buffer_name, ':h')
       end
       vim.cmd('enew | term')
       if cdPath ~= false then
