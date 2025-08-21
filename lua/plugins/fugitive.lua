@@ -19,5 +19,6 @@ return {
     vim.keymap.set('n', '<leader>gmm', '<cmd>Git merge main<CR>', { desc = 'Git [M]erge [M]ain' })
 
     vim.keymap.set('n', '<leader>grm', '<cmd>Git rebase main<CR>', { desc = 'Git [R]ebase [M]ain' })
+    vim.keymap.set('n', '<leader>grc', '<cmd>Git rebase --continue<CR>', { desc = 'Git [R]ebase [C]ontinue' })
   end,
 }
