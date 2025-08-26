@@ -1,10 +1,15 @@
 return {
   'tpope/vim-fugitive',
   config = function()
-    vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Open Git [S]taging' })
+    vim.keymap.set('n', '<leader>gv', vim.cmd.Git, { desc = 'Open Git [V]iew' })
     vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<CR>', { desc = 'Git [P]ull' })
     vim.keymap.set('n', '<leader>gg', '<cmd>Git push<CR>', { desc = '[G]it Push' })
     vim.keymap.set('n', '<leader>gf', '<cmd>Git fetch<CR>', { desc = 'Git [F]etch' })
+    vim.keymap.set('n', '<leader>gc', ":Git commit -n -m '", { desc = 'Git [C]ommit' })
+
+    vim.keymap.set('n', '<leader>gss', '<cmd>Git stash push<CR>', { desc = 'Git [S]tash [P]ush' })
+    vim.keymap.set('n', '<leader>gsp', '<cmd>Git stash pop 0<CR>', { desc = 'Git [S]tash [P]op 0' })
+    vim.keymap.set('n', '<leader>gsa', '<cmd>Git stash apply 0<CR>', { desc = 'Git [A]pply 0' })
 
     vim.keymap.set('n', '<leader>gbm', '<cmd>Git checkout main<CR>', { desc = 'Git [B]ranch switch [M]ain' })
     vim.keymap.set('n', '<leader>gbn', ':Git checkout -b ', { desc = 'Git [B]ranch [N]ew' })
