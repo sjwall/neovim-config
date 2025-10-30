@@ -1,6 +1,7 @@
 local config = {}
 config['avante.nvim'] = true
 config['blink.cmp'] = true
+config['claude-code.nvim'] = false
 config['Comment.nvim'] = true
 config['conform.nvim'] = true
 config['copilot.vim'] = false
