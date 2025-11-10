@@ -32,11 +32,17 @@ return {
 
     require('which-key').add({
       {
+        '<leader>m',
+        desc = '[M]essages',
+        icon = '󰍪',
+      },
+      {
         '<leader>mm',
         function()
           require('noice').cmd('history')
         end,
         desc = 'Show [M]essages [H]istory',
+        icon = '󰚢',
       },
       {
         '<leader>md',
@@ -44,6 +50,7 @@ return {
           require('noice').cmd('dismiss')
         end,
         desc = '[M]essages [D]imiss',
+        icon = '󱙎',
       },
     })
 
