@@ -3,7 +3,12 @@ local config = require('config.config_loader').get_item_config('avante.nvim')
 local provider = 'ollama'
 local providers = {
   ollama = {
-    model = 'deepseek-r1:14b',
+    -- model = 'deepseek-r1:14b',
+    model = 'qwen3-coder:latest',
+    is_env_set = function()
+      return true
+    end,
+    -- is_env_set = require('avante.providers.ollama').check_endpoint_alive,
   },
 }
 
