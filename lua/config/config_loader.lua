@@ -36,7 +36,7 @@ end
 function M.get_item_config(name)
   local config = M.get_config()
 
-  if config and config[name] and config[name] ~= false then
+  if config and type(config[name]) ~= 'boolean' then
     return config[name]
   end
 
@@ -45,7 +45,12 @@ end
 
 function M.is_enabled(name)
   local config = M.get_config()
-  return not config or config[name] ~= false
+  if config and config[name] ~= nil then
+    return config[name] ~= false
+  else
+    vim.notify('[config_loader] Missing ' .. name, vim.log.levels.WARN)
+  end
+  return true
 end
 
 return M
