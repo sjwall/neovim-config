@@ -101,6 +101,21 @@ wk.add({
     icon = '',
   },
 
+  {
+    '<C-A-x>',
+    function()
+      for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(bufnr) and vim.bo[bufnr].buftype ~= 'terminal' then
+          -- if not vim.api.nvim_buf_get_option(bufnr, 'modified') then
+          pcall(vim.api.nvim_buf_delete, bufnr, { force = true }) -- force = true to delete even if modified
+          -- end
+        end
+      end
+    end,
+    desc = 'Close all non-terminal buffers',
+    icon = '',
+  },
+
   -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
   -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
   -- is not what someone will guess without a bit more experience.
