@@ -118,5 +118,12 @@ return {
         ignore = true,
       })
     end, { desc = '[S]earch [A]ll files' })
+
+    -- Grep all files
+    vim.keymap.set('n', '<leader>sG', function()
+      builtin.live_grep({
+        additional_args = { '--hidden' },
+      })
+    end, { desc = '[S]earch all files by [G]rep' })
   end,
 }
