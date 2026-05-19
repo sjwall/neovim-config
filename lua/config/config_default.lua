@@ -1,5 +1,5 @@
 local config = {}
-config['avante.nvim'] = true
+config['avante.nvim'] = false
 config['blink.cmp'] = true
 config['claude-code.nvim'] = false
 config['Comment.nvim'] = true
