@@ -22,3 +22,8 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = 'json',
   command = 'setlocal formatprg=jq',
 })
+
+require('config.image-info').setup({
+  -- Optional: Customize the shortcut if you want
+  -- shortcut = "<leader>id",
+})
