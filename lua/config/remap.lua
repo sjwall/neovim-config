@@ -55,7 +55,8 @@ wk.add({
       elseif vim.fn.filereadable(current_buffer_name) == 1 then
         cdPath = vim.fn.fnamemodify(current_buffer_name, ':h')
       end
-      vim.cmd('enew | term')
+
+      vim.cmd('enew | term zsh')
       if cdPath ~= false then
         vim.fn.chansend(vim.b.terminal_job_id, 'cd ' .. cdPath .. '\nfc -R\nclear\n')
       end
@@ -66,7 +67,7 @@ wk.add({
   {
     '<leader>B',
     function()
-      vim.cmd('enew | term')
+      vim.cmd('enew | term zsh')
       vim.cmd('startinsert!')
     end,
     desc = 'Open [B]uffer in CWD',
