@@ -44,10 +44,11 @@ wk.add({
     '<leader>b',
     function()
       local cdPath = false
+      local current_cwd = vim.fn.getcwd()
       local current_buffer_name = vim.api.nvim_buf_get_name(0)
       if vim.bo.filetype == 'oil' then
         local oil_path = current_buffer_name:gsub('^oil://', '')
-        if oil_path ~= '' and oil_path ~= vim.fn.getcwd() .. '/' then
+        if oil_path ~= '' and oil_path ~= current_cwd .. '/' then
           cdPath = vim.fn.fnamemodify(oil_path, ':p')
         end
       elseif vim.bo.buftype == 'terminal' then
@@ -56,11 +57,15 @@ wk.add({
         cdPath = vim.fn.fnamemodify(current_buffer_name, ':h')
       end
 
-      vim.cmd('enew | term zsh')
+      vim.cmd('enew')
       if cdPath ~= false then
-        vim.fn.chansend(vim.b.terminal_job_id, 'cd ' .. cdPath .. '\nfc -R\nclear\n')
+        vim.cmd('lcd ' .. vim.fn.fnameescape(cdPath))
       end
+      vim.cmd('term zsh')
       vim.cmd('startinsert!')
+      if cdPath ~= false then
+        vim.cmd('lcd ' .. vim.fn.fnameescape(current_cwd))
+      end
     end,
     desc = 'Open [B]uffer in current buffer directory.',
   },
