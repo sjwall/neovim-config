@@ -151,6 +151,15 @@ return {
       end,
     })
 
+    -- Swallow noisy LSP request errors (e.g. ts_ls "document should be opened first")
+    local orig_doc_highlight = vim.lsp.handlers['textDocument/documentHighlight']
+    vim.lsp.handlers['textDocument/documentHighlight'] = function(err, result, ctx, config)
+      if err then
+        return
+      end
+      return orig_doc_highlight
+    end
+
     -- Diagnostic Config
     -- See :help vim.diagnostic.Opts
     vim.diagnostic.config({
@@ -206,7 +215,19 @@ return {
       --    https://github.com/pmizio/typescript-tools.nvim
       --
       -- But for many setups, the LSP (`ts_ls`) will work just fine
-      ts_ls = {},
+      ts_ls = {
+        handlers = {
+          ['window/showMessage'] = function(_, result)
+            return result
+          end,
+          ['window/showMessageRequest'] = function()
+            return vim.NIL
+          end,
+          ['window/logMessage'] = function(_, result)
+            return result
+          end,
+        },
+      },
       eslint = {},
       --
 
