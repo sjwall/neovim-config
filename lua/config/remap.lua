@@ -1,4 +1,5 @@
 local wk = require('which-key')
+local directory = require('utils.directory')
 wk.add({
   { '<leader>cp', ":let @+ = expand('%:p')<CR>", desc = '[C]opy current buffer [P]ath' },
   { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
@@ -46,10 +47,10 @@ wk.add({
       local cdPath = false
       local current_cwd = vim.fn.getcwd()
       local current_buffer_name = vim.api.nvim_buf_get_name(0)
-      if vim.bo.filetype == 'oil' then
-        local oil_path = current_buffer_name:gsub('^oil://', '')
-        if oil_path ~= '' and oil_path ~= current_cwd .. '/' then
-          cdPath = vim.fn.fnamemodify(oil_path, ':p')
+      local oil_dir = directory.oil_buffer_dir()
+      if oil_dir then
+        if oil_dir ~= current_cwd .. '/' then
+          cdPath = oil_dir
         end
       elseif vim.bo.buftype == 'terminal' then
         -- TODO figure this out
