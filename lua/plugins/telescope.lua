@@ -70,11 +70,44 @@ return {
     local builtin = require('telescope.builtin')
     local wk = require('which-key')
     local directory = require('utils.directory')
+
+    -- Open a zsh terminal in the directory of the selected entry.
+    local function open_terminal_at_entry(prompt_bufnr)
+      local action_state = require('telescope.actions.state')
+      local entry = action_state.get_selected_entry()
+      require('telescope.actions').close(prompt_bufnr)
+      if not entry then
+        return
+      end
+
+      local target = entry.path or entry.filename or entry.value or entry[1]
+      local dir = vim.fn.isdirectory(target) == 1 and target or vim.fn.fnamemodify(target, ':h')
+
+      local current_cwd = vim.fn.getcwd()
+      vim.cmd('enew')
+      vim.cmd('lcd ' .. vim.fn.fnameescape(dir))
+      vim.cmd('term zsh')
+      vim.cmd('startinsert!')
+      vim.cmd('lcd ' .. vim.fn.fnameescape(current_cwd))
+    end
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
     vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Search Git [P]roject Files' })
     vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+    vim.keymap.set('n', '<leader>sb', function()
+      local oil_dir = directory.oil_buffer_dir()
+      builtin.find_files({
+        prompt_title = 'Open Terminal in Directory',
+        hidden = true,
+        find_command = { 'fd', '--type', 'f', '--type', 'd', '--hidden', '--exclude', '.git' },
+        search_dirs = oil_dir and { oil_dir } or nil,
+        attach_mappings = function(_, map)
+          map({ 'i', 'n' }, '<CR>', open_terminal_at_entry)
+          return true
+        end,
+      })
+    end, { desc = '[S]earch open [B]uffer/terminal in dir' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sg', function()
       local oil_dir = directory.oil_buffer_dir()
