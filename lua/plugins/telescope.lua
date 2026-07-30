@@ -90,6 +90,21 @@ return {
       vim.cmd('startinsert!')
       vim.cmd('lcd ' .. vim.fn.fnameescape(current_cwd))
     end
+
+    -- Open oil.nvim at the selected entry directory
+    local function open_oil_at_entry(prompt_bufnr)
+      local action_state = require('telescope.actions.state')
+      local entry = action_state.get_selected_entry()
+      require('telescope.actions').close(prompt_bufnr)
+      if not entry then
+        return
+      end
+
+      local target = entry.path or entry.filename or entry.value or entry[1]
+      local dir = vim.fn.isdirectory(target) == 1 and target or vim.fn.fnamemodify(target, ':h')
+
+      require('oil').open(dir)
+    end
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
     vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -108,6 +123,19 @@ return {
         end,
       })
     end, { desc = '[S]earch open [B]uffer/terminal in dir' })
+    vim.keymap.set('n', '<leader>so', function()
+      local oil_dir = directory.oil_buffer_dir()
+      builtin.find_files({
+        prompt_title = 'Open Oil in Directory',
+        hidden = true,
+        find_command = { 'fd', '--type', 'f', '--type', 'd', '--hidden', '--exclude', '.git' },
+        search_dirs = oil_dir and { oil_dir } or nil,
+        attach_mappings = function(_, map)
+          map({ 'i', 'n' }, '<CR>', open_oil_at_entry)
+          return true
+        end,
+      })
+    end, { desc = '[S]earch open [O]il in dir' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
     vim.keymap.set('n', '<leader>sg', function()
       local oil_dir = directory.oil_buffer_dir()
