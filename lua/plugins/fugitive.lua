@@ -6,7 +6,8 @@ return {
     vim.keymap.set('n', '<leader>gg', '<cmd>Git push<CR>', { desc = '[G]it Push' })
     vim.keymap.set('n', '<leader>gf', '<cmd>Git fetch<CR>', { desc = '[G]it [F]etch' })
     vim.keymap.set('n', '<leader>gc', ":Git commit -n -m ''<LEFT>", { desc = '[G]it [C]ommit' })
-    vim.keymap.set('n', '<leader>ga', ':Git commit -n --amend<CR>', { desc = '[G]it Commit [A]mend' })
+    vim.keymap.set('n', '<leader>ga', ':Git commit -n --amend --no-edit<CR>', { desc = '[G]it Commit [A]mend' })
+    vim.keymap.set('n', '<leader>ge', ':Git commit -n --amend<CR>', { desc = '[G]it Commit am[E]nd message' })
 
     vim.keymap.set('n', '<leader>gss', '<cmd>Git stash push<CR>', { desc = '[G]it [S]tash [P]ush' })
     vim.keymap.set('n', '<leader>gsp', '<cmd>Git stash pop 0<CR>', { desc = '[G]it [S]tash [P]op 0' })
