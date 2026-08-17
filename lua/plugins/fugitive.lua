@@ -9,6 +9,13 @@ return {
     vim.keymap.set('n', '<leader>gc', ":Git commit -n -m ''<LEFT>", { desc = '[G]it [C]ommit' })
     vim.keymap.set('n', '<leader>ga', ':Git commit -n --amend --no-edit<CR>', { desc = '[G]it Commit [A]mend' })
     vim.keymap.set('n', '<leader>ge', ':Git commit -n --amend<CR>', { desc = '[G]it Commit am[E]nd message' })
+    vim.keymap.set('n', '<leader>gu', function()
+      local branch = vim.trim(vim.fn.system('git rev-parse --abbrev-ref HEAD'))
+      local sha = vim.trim(vim.fn.system('git rev-parse HEAD'))
+      local upstream = vim.trim(vim.fn.system('git rev-parse --abbrev-ref --symbolic-full-name @{push}'))
+      local remote = (vim.v.shell_error == 0 and upstream:match('^([^/]+)/')) or 'origin'
+      vim.cmd('Git push ' .. remote .. ' ' .. sha .. ':refs/heads/' .. branch .. ' -f --no-verify')
+    end, { desc = '[G]it [U]npushed push (force, no-verify)' })
 
     vim.keymap.set('n', '<leader>gss', '<cmd>Git stash push<CR>', { desc = '[G]it [S]tash [P]ush' })
     vim.keymap.set('n', '<leader>gsp', '<cmd>Git stash pop 0<CR>', { desc = '[G]it [S]tash [P]op 0' })
