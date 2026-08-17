@@ -3,6 +3,7 @@ return {
   config = function()
     vim.keymap.set('n', '<leader>gv', vim.cmd.Git, { desc = 'Open [G]it [V]iew' })
     vim.keymap.set('n', '<leader>gp', '<cmd>Git pull<CR>', { desc = '[G]it [P]ull' })
+    vim.keymap.set('n', '<leader>go', '<cmd>Git pull origin main<CR>', { desc = '[G]it pull [O]rigin main' })
     vim.keymap.set('n', '<leader>gg', '<cmd>Git push<CR>', { desc = '[G]it Push' })
     vim.keymap.set('n', '<leader>gf', '<cmd>Git fetch<CR>', { desc = '[G]it [F]etch' })
     vim.keymap.set('n', '<leader>gc', ":Git commit -n -m ''<LEFT>", { desc = '[G]it [C]ommit' })
