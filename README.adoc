@@ -1,3 +1,10 @@
 == Neovim Config
 
 My Neovim Config.
+
+== Installation
+
+[source,sh]
+----
+curl --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/sjwall/neovim-config/main/install.sh | sh
+----
