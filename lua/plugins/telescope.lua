@@ -50,6 +50,25 @@ return {
       --
       defaults = {
         path_display = { 'filename_first' },
+        file_ignore_patterns = {
+          '^openspec/',
+          '^openspec$',
+          '/openspec/',
+          '/openspec$',
+          '^openspec\\',
+          '\\openspec\\',
+          '\\openspec$',
+        },
+        vimgrep_arguments = {
+          'rg',
+          '--color=never',
+          '--no-heading',
+          '--with-filename',
+          '--line-number',
+          '--column',
+          '--smart-case',
+          '--glob=!**/openspec/**',
+        },
         --   mappings = {
         --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
         --   },
@@ -115,7 +134,7 @@ return {
       builtin.find_files({
         prompt_title = 'Open Terminal in Directory',
         hidden = true,
-        find_command = { 'fd', '--type', 'f', '--type', 'd', '--hidden', '--exclude', '.git' },
+        find_command = { 'fd', '--type', 'f', '--type', 'd', '--hidden', '--exclude', '.git', '--exclude', 'openspec' },
         search_dirs = oil_dir and { oil_dir } or nil,
         attach_mappings = function(_, map)
           map({ 'i', 'n' }, '<CR>', open_terminal_at_entry)
@@ -128,7 +147,7 @@ return {
       builtin.find_files({
         prompt_title = 'Open Oil in Directory',
         hidden = true,
-        find_command = { 'fd', '--type', 'f', '--type', 'd', '--hidden', '--exclude', '.git' },
+        find_command = { 'fd', '--type', 'f', '--type', 'd', '--hidden', '--exclude', '.git', '--exclude', 'openspec' },
         search_dirs = oil_dir and { oil_dir } or nil,
         attach_mappings = function(_, map)
           map({ 'i', 'n' }, '<CR>', open_oil_at_entry)
@@ -190,7 +209,7 @@ return {
     vim.keymap.set('n', '<leader>sG', function()
       local oil_dir = directory.oil_buffer_dir()
       builtin.live_grep({
-        additional_args = { '--hidden' },
+        additional_args = { '--hidden', '--glob=!**/openspec/**' },
         search_dirs = { oil_dir },
       })
     end, { desc = '[S]earch all files by [G]rep' })
