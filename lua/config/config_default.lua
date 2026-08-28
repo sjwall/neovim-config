@@ -30,6 +30,7 @@ config['nvim-colorizer.lua'] = true
 config['nvim-dap'] = true
 config['nvim-lspconfig'] = true
 config['nvim-notify'] = true
+config['nvim-scrollbar'] = true
 config['nvim-treesitter'] = true
 config['nvim-web-devicons'] = true
 config['oil-git-status.nvim'] = true
