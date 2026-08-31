@@ -6,9 +6,51 @@ return {
     vim.keymap.set('n', '<leader>go', '<cmd>Git pull origin main<CR>', { desc = '[G]it pull [O]rigin main' })
     vim.keymap.set('n', '<leader>gg', '<cmd>Git push<CR>', { desc = '[G]it Push' })
     vim.keymap.set('n', '<leader>gf', '<cmd>Git fetch<CR>', { desc = '[G]it [F]etch' })
-    vim.keymap.set('n', '<leader>gc', ":Git commit -n -m ''<LEFT>", { desc = '[G]it [C]ommit' })
-    vim.keymap.set('n', '<leader>ga', ':Git commit -n --amend --no-edit<CR>', { desc = '[G]it Commit [A]mend' })
-    vim.keymap.set('n', '<leader>ge', ':Git commit -n --amend<CR>', { desc = '[G]it Commit am[E]nd message' })
+    local function is_rebasing()
+      local git_dir = ''
+      if vim.fn.exists('*FugitiveGitDir') == 1 then
+        git_dir = vim.fn.FugitiveGitDir()
+      end
+      if git_dir == '' then
+        local out = vim.trim(vim.fn.system('git rev-parse --git-dir'))
+        if vim.v.shell_error == 0 and out ~= '' then
+          git_dir = out
+        end
+      end
+      if git_dir == '' then
+        return false
+      end
+      return vim.fn.isdirectory(git_dir .. '/rebase-merge') == 1
+        or vim.fn.isdirectory(git_dir .. '/rebase-apply') == 1
+    end
+
+    vim.keymap.set('n', '<leader>gc', function()
+      if is_rebasing() then
+        vim.notify('Cannot commit: repository is currently rebasing', vim.log.levels.ERROR)
+        return
+      end
+      vim.api.nvim_feedkeys(
+        vim.api.nvim_replace_termcodes(":Git commit -n -m ''<Left>", true, false, true),
+        'n',
+        false
+      )
+    end, { desc = '[G]it [C]ommit' })
+
+    vim.keymap.set('n', '<leader>ga', function()
+      if is_rebasing() then
+        vim.notify('Cannot commit: repository is currently rebasing', vim.log.levels.ERROR)
+        return
+      end
+      vim.cmd('Git commit -n --amend --no-edit')
+    end, { desc = '[G]it Commit [A]mend' })
+
+    vim.keymap.set('n', '<leader>ge', function()
+      if is_rebasing() then
+        vim.notify('Cannot commit: repository is currently rebasing', vim.log.levels.ERROR)
+        return
+      end
+      vim.cmd('Git commit -n --amend')
+    end, { desc = '[G]it Commit am[E]nd message' })
     vim.keymap.set('n', '<leader>gu', function()
       local branch = vim.trim(vim.fn.system('git rev-parse --abbrev-ref HEAD'))
       local sha = vim.trim(vim.fn.system('git rev-parse HEAD'))
