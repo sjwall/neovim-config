@@ -48,7 +48,7 @@ function M.is_enabled(name)
   if config and config[name] ~= nil then
     return config[name] ~= false
   else
-    vim.notify('[config_loader] Missing ' .. name, vim.log.levels.WARN)
+    vim.notify('[config_loader] Missing `' .. name .. '` plugin will not be loaded', vim.log.levels.WARN)
   end
   return true
 end
