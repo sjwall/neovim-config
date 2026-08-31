@@ -24,6 +24,25 @@ return {
         or vim.fn.isdirectory(git_dir .. '/rebase-apply') == 1
     end
 
+    local function is_head_of_main()
+      local head_sha = vim.trim(vim.fn.system('git rev-parse -q --verify HEAD'))
+      if vim.v.shell_error ~= 0 or head_sha == '' then
+        return false
+      end
+
+      local main_sha = vim.trim(vim.fn.system('git rev-parse -q --verify main'))
+      if vim.v.shell_error == 0 and main_sha ~= '' and head_sha == main_sha then
+        return true
+      end
+
+      local origin_main_sha = vim.trim(vim.fn.system('git rev-parse -q --verify origin/main'))
+      if vim.v.shell_error == 0 and origin_main_sha ~= '' and head_sha == origin_main_sha then
+        return true
+      end
+
+      return false
+    end
+
     vim.keymap.set('n', '<leader>gc', function()
       if is_rebasing() then
         vim.notify('Cannot commit: repository is currently rebasing', vim.log.levels.ERROR)
@@ -41,12 +60,20 @@ return {
         vim.notify('Cannot commit: repository is currently rebasing', vim.log.levels.ERROR)
         return
       end
+      if is_head_of_main() then
+        vim.notify('Cannot amend: HEAD is the main branch commit', vim.log.levels.ERROR)
+        return
+      end
       vim.cmd('Git commit -n --amend --no-edit')
     end, { desc = '[G]it Commit [A]mend' })
 
     vim.keymap.set('n', '<leader>ge', function()
       if is_rebasing() then
         vim.notify('Cannot commit: repository is currently rebasing', vim.log.levels.ERROR)
+        return
+      end
+      if is_head_of_main() then
+        vim.notify('Cannot amend: HEAD is the main branch commit', vim.log.levels.ERROR)
         return
       end
       vim.cmd('Git commit -n --amend')
