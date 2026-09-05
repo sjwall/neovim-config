@@ -63,10 +63,10 @@ wk.add({
         vim.cmd('lcd ' .. vim.fn.fnameescape(cdPath))
       end
       vim.cmd('term zsh')
-      vim.cmd('startinsert!')
       if cdPath ~= false then
         vim.cmd('lcd ' .. vim.fn.fnameescape(current_cwd))
       end
+      vim.cmd('normal i')
     end,
     desc = 'Open [B]uffer in current buffer directory.',
   },
@@ -74,7 +74,7 @@ wk.add({
     '<leader>B',
     function()
       vim.cmd('enew | term zsh')
-      vim.cmd('startinsert!')
+      vim.cmd('normal i')
     end,
     desc = 'Open [B]uffer in CWD',
   },

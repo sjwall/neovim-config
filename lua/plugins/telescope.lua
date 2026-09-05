@@ -106,8 +106,8 @@ return {
       vim.cmd('enew')
       vim.cmd('lcd ' .. vim.fn.fnameescape(dir))
       vim.cmd('term zsh')
-      vim.cmd('startinsert!')
       vim.cmd('lcd ' .. vim.fn.fnameescape(current_cwd))
+      vim.cmd('normal i')
     end
 
     -- Open oil.nvim at the selected entry directory
