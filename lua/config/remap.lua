@@ -1,8 +1,21 @@
 local wk = require('which-key')
 local directory = require('utils.directory')
+local config_loader = require('config.config_loader')
+
 wk.add({
   { '<leader>cp', ":let @+ = expand('%:p')<CR>", desc = '[C]opy current buffer [P]ath' },
   { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
+  -- AI
+  {
+    '<leader>ac',
+    function()
+      local agent = config_loader.get_ai_agent()
+      vim.cmd('enew | term ' .. agent)
+      vim.cmd('normal! i')
+    end,
+    desc = 'Launch [A]i [C]onsole',
+    icon = '',
+  },
   -- Move code up and down
   { 'J', ":m '>+1<CR>gv=gv", mode = 'v' },
   { 'K', ":m '<-2<CR>gv=gv", mode = 'v' },

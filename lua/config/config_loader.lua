@@ -43,6 +43,14 @@ function M.get_item_config(name)
   return nil
 end
 
+function M.get_ai_agent()
+  local config = M.get_config()
+  if config and config['ai_agent'] and config['ai_agent'] ~= '' then
+    return config['ai_agent']
+  end
+  return 'opencode'
+end
+
 function M.is_enabled(name)
   local config = M.get_config()
   if config and config[name] ~= nil then

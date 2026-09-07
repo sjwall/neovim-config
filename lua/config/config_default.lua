@@ -1,4 +1,5 @@
 local config = {}
+config['ai_agent'] = 'opencode'
 config['Comment.nvim'] = true
 config['LuaSnip'] = true
 config['avante.nvim'] = false
