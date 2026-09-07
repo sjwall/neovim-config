@@ -4,7 +4,6 @@ local config_loader = require('config.config_loader')
 
 wk.add({
   { '<leader>cp', ":let @+ = expand('%:p')<CR>", desc = '[C]opy current buffer [P]ath' },
-  { '<leader>st', vim.cmd.Ex, desc = '[S]earch tree [V]iew', icon = '' },
   -- AI
   {
     '<leader>ac',
