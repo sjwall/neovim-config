@@ -51,6 +51,15 @@ return { -- Autoformat
       markdown = { 'prettier' },
       -- YAML
       yaml = { 'prettier' },
+      xml = { 'xmllint' },
+    },
+    formatters = {
+      xmllint = {
+        inherit = false,
+        command = 'xmllint',
+        args = { '--format', '-' },
+        stdin = true,
+      },
     },
   },
 }
