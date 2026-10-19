@@ -91,6 +91,7 @@ return {
     vim.keymap.set('n', '<leader>gsa', '<cmd>Git stash apply 0<CR>', { desc = '[G]it [A]pply 0' })
 
     vim.keymap.set('n', '<leader>gbm', '<cmd>Git checkout main<CR>', { desc = '[G]it [B]ranch switch [M]ain' })
+    vim.keymap.set('n', '<leader>gbd', '<cmd>Git checkout develop<CR>', { desc = '[G]it [B]ranch switch [D]evelop' })
     vim.keymap.set('n', '<leader>gbn', ':Git checkout -b ', { desc = '[G]it [B]ranch [N]ew' })
     vim.keymap.set('n', '<leader>gbs', ':Git checkout ', { desc = '[G]it [B]ranch [S]witch' })
     vim.keymap.set(
