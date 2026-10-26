@@ -22,7 +22,7 @@ function M.oil_buffer_dir(bufnr)
   end
   local oil_path = vim.api.nvim_buf_get_name(bufnr):gsub('^oil://', '')
   if oil_path == '' then
-    return nill
+    return nil
   end
   return vim.fn.fnamemodify(oil_path, ':p')
 end
